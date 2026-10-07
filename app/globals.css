@@ -1,0 +1,473 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* =========================================================
+   Tokens — light (the main marketing site is light-only)
+   ========================================================= */
+:root {
+  color-scheme: light;
+
+  /* Brand gradient stops — reserved for the logo and the healthcare vertical */
+  --g1: #7c3aed;
+  --g2: #2563eb;
+
+  /* Paper & ink */
+  --bg: #f4f2ee;
+  --bg-alt: #ebe8e1;
+  --surface: #f4f2ee;
+  --surface-2: #faf9f6;
+  --ink: #160e20;
+  --ink-2: #3a3540;
+  --mute: #625d66;
+  --mute-2: #8e8893;
+  --line: #dedad2;
+  --line-2: #cdc8be;
+  --platinum: #e5e5e4;
+
+  /* Signal: the one accent, used for state and data — never decoration */
+  --signal: #2563eb;
+  --signal-ink: #1d4fc4;
+  --signal-soft: color-mix(in oklab, #2563eb 10%, transparent);
+
+  /* Sora is the primary face; Geist Mono is reserved for small technical labels */
+  --font-display-stack: var(--font-sora), system-ui, sans-serif;
+  --font-ui-stack: var(--font-sora), system-ui, sans-serif;
+
+  --shadow-sm: 0 1px 2px rgba(22,14,32,.04), 0 1px 1px rgba(22,14,32,.03);
+  --shadow-md: 0 2px 12px rgba(22,14,32,.08);
+  --shadow-lg: 0 24px 60px -24px rgba(22,14,32,.22), 0 8px 24px -12px rgba(22,14,32,.08);
+  --shadow-glow: var(--shadow-lg);
+
+  --r-sm: 4px;
+  --r-md: 6px;
+  --r-lg: 10px;
+  --r-xl: 14px;
+
+  --ease: cubic-bezier(.4,0,.2,1);
+  --ease-out: cubic-bezier(.16,1,.3,1);
+
+  --container: 1320px;
+  --section-y: 140px;
+
+  --quishub-black: #160e20;
+  --quishub-blue: #2563eb;
+  --quishub-purple: #7c3aed;
+  --quishub-light: #f4f2ee;
+  --quishub-black-rgb: 22 14 32;
+  --quishub-light-rgb: 244 242 238;
+  --quishub-muted-rgb: 98 93 102;
+  --quishub-faint-rgb: 142 136 147;
+  --quishub-surface-rgb: 244 242 238;
+  --quishub-surface-alt-rgb: 250 249 246;
+  --quishub-border-rgb: 222 218 210;
+  --quishub-gradient: linear-gradient(90deg, #2563eb 0%, #2563eb 55%, #7c3aed 100%);
+
+  --nav-bg-rest: transparent;
+  --nav-bg-scrolled: color-mix(in oklab, var(--bg) 95%, transparent);
+  --nav-shadow: none;
+  --button-primary-bg: var(--ink);
+  --button-primary-fg: #f4f2ee;
+  --button-secondary-bg: transparent;
+  --button-secondary-fg: #160e20;
+  --button-secondary-border: rgba(22, 14, 32, 0.2);
+  --button-ghost-fg: #160e20;
+  --button-hover-bg: rgba(22, 14, 32, 0.05);
+  --focus-ring: #2563eb;
+  --theme-icon-bg: rgba(22, 14, 32, 0.06);
+  --theme-number-ghost: rgba(22, 14, 32, 0.12);
+  --surface-card-bg: #faf9f6;
+  --surface-card-strong-bg: #ffffff;
+  --surface-card-border: rgba(22, 14, 32, 0.1);
+  --surface-card-shadow: none;
+  --surface-subtle-bg: #ebe8e1;
+  --surface-subtle-border: rgba(22, 14, 32, 0.08);
+  --surface-chip-bg: #ebe8e1;
+  --surface-chip-border: rgba(22, 14, 32, 0.1);
+  --surface-icon-bg: #ebe8e1;
+  --surface-divider: rgba(22, 14, 32, 0.1);
+  --surface-connector: rgba(22, 14, 32, 0.14);
+  --surface-number: rgba(22, 14, 32, 0.12);
+  --hero-glow-primary: none;
+  --hero-glow-secondary: none;
+}
+
+/* =========================================================
+   Tokens — ink. Applied to deliberately dark sections via
+   data-theme="dark" on the section, so every token-based class
+   and Tailwind `dark:` variant inside flips with it.
+   ========================================================= */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #121014;
+  --bg-alt: #17151a;
+  --surface: #121014;
+  --surface-2: #1c1a1f;
+  --ink: #f1eee8;
+  --ink-2: #d9d5ce;
+  --mute: #a39ea8;
+  --mute-2: #77727c;
+  --line: #2b2830;
+  --line-2: #3a3740;
+  --platinum: #e5e5e4;
+
+  --signal: #6f9bff;
+  --signal-ink: #9ab8ff;
+  --signal-soft: color-mix(in oklab, #6f9bff 16%, transparent);
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.4);
+  --shadow-md: 0 2px 16px rgba(0,0,0,.4);
+  --shadow-lg: 0 24px 60px -24px rgba(0,0,0,.7);
+  --shadow-glow: var(--shadow-lg);
+
+  --quishub-black: #f1eee8;
+  --quishub-light: #121014;
+  --quishub-black-rgb: 241 238 232;
+  --quishub-light-rgb: 18 16 20;
+  --quishub-muted-rgb: 163 158 168;
+  --quishub-faint-rgb: 119 114 124;
+  --quishub-surface-rgb: 18 16 20;
+  --quishub-surface-alt-rgb: 28 26 31;
+  --quishub-border-rgb: 43 40 48;
+  --nav-bg-rest: transparent;
+  --nav-bg-scrolled: color-mix(in oklab, var(--bg) 88%, transparent);
+  --button-primary-bg: var(--ink);
+  --button-primary-fg: #121014;
+  --button-secondary-bg: transparent;
+  --button-secondary-fg: #f1eee8;
+  --button-secondary-border: rgba(241, 238, 232, 0.24);
+  --button-ghost-fg: #f1eee8;
+  --button-hover-bg: rgba(241, 238, 232, 0.06);
+  --focus-ring: #9ab8ff;
+  --theme-icon-bg: rgba(241, 238, 232, 0.08);
+  --theme-number-ghost: rgba(241, 238, 232, 0.12);
+  --surface-card-bg: rgba(241, 238, 232, 0.03);
+  --surface-card-strong-bg: rgba(241, 238, 232, 0.06);
+  --surface-card-border: rgba(241, 238, 232, 0.1);
+  --surface-card-shadow: none;
+  --surface-subtle-bg: rgba(241, 238, 232, 0.05);
+  --surface-subtle-border: rgba(241, 238, 232, 0.1);
+  --surface-chip-bg: rgba(241, 238, 232, 0.06);
+  --surface-chip-border: rgba(241, 238, 232, 0.1);
+  --surface-icon-bg: rgba(241, 238, 232, 0.08);
+  --surface-divider: rgba(241, 238, 232, 0.12);
+  --surface-connector: rgba(241, 238, 232, 0.16);
+  --surface-number: rgba(241, 238, 232, 0.1);
+}
+
+/* =========================================================
+   Healthcare pin — keeps the healthcare vertical on its
+   original platinum palette and Texar headings, independent
+   of the main site's system.
+   ========================================================= */
+.theme-platinum {
+  color-scheme: light;
+  --bg: #e5e5e4;
+  --bg-alt: #dcdcdb;
+  --surface: #e5e5e4;
+  --surface-2: #f2f2f1;
+  --ink: #160e20;
+  --ink-2: #2c2139;
+  --mute: #6b6477;
+  --mute-2: #9b93a6;
+  --line: #d1d1cf;
+  --line-2: #c4c4c2;
+  --shadow-glow: 0 0 0 1px rgba(124,58,237,.15), 0 20px 60px -20px rgba(124,58,237,.35);
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 18px;
+  --r-xl: 24px;
+  --font-display-stack: var(--font-texar), var(--font-tt-lakes), system-ui, sans-serif;
+  --font-ui-stack: var(--font-tt-lakes), var(--font-sora), system-ui, sans-serif;
+  --quishub-black: #160e20;
+  --quishub-light: #e5e5e4;
+  --quishub-black-rgb: 22 14 32;
+  --quishub-light-rgb: 229 229 228;
+  --quishub-muted-rgb: 107 100 119;
+  --quishub-faint-rgb: 155 147 166;
+  --quishub-surface-rgb: 229 229 228;
+  --quishub-surface-alt-rgb: 242 242 241;
+  --quishub-border-rgb: 209 209 207;
+  --button-primary-bg: var(--quishub-gradient);
+  --button-primary-fg: #e5e5e4;
+  --button-secondary-border: rgba(22, 14, 32, 0.16);
+  --button-hover-bg: rgba(22, 14, 32, 0.04);
+  --focus-ring: #160e20;
+  --theme-icon-bg: rgba(22, 14, 32, 0.08);
+  --surface-card-bg: color-mix(in oklab, var(--platinum) 92%, var(--g1) 4%, var(--g2) 4%);
+  --surface-card-strong-bg: color-mix(in oklab, var(--platinum) 88%, var(--g1) 6%, var(--g2) 6%);
+  --surface-card-border: rgba(22, 14, 32, 0.08);
+  --surface-subtle-bg: color-mix(in oklab, var(--platinum) 90%, var(--g1) 5%, var(--g2) 5%);
+  --surface-subtle-border: rgba(22, 14, 32, 0.06);
+  --surface-chip-bg: color-mix(in oklab, var(--platinum) 90%, var(--g1) 5%, var(--g2) 5%);
+  --surface-chip-border: rgba(22, 14, 32, 0.08);
+  --surface-icon-bg: color-mix(in oklab, var(--platinum) 86%, var(--g1) 7%, var(--g2) 7%);
+  --surface-divider: rgba(22, 14, 32, 0.1);
+  --surface-connector: rgba(22, 14, 32, 0.12);
+  --hero-glow-primary: radial-gradient(40rem 24rem at 16% 16%, color-mix(in oklab, var(--g1) 16%, transparent), transparent 72%);
+  --hero-glow-secondary: radial-gradient(36rem 24rem at 84% 18%, color-mix(in oklab, var(--g2) 14%, transparent), transparent 74%);
+}
+
+@layer base {
+  body {
+    @apply bg-quishub-light text-quishub-black antialiased;
+    font-family: var(--font-sora), system-ui, sans-serif;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2 {
+    @apply font-semibold tracking-heading;
+    font-family: var(--font-display-stack);
+  }
+
+  h1, h2, h3, blockquote {
+    text-wrap: balance;
+  }
+
+  h3, h4, h5, h6 {
+    @apply font-semibold tracking-heading;
+    font-family: var(--font-ui-stack);
+  }
+
+  button,
+  label,
+  input,
+  textarea,
+  select {
+    font-family: var(--font-sora), system-ui, sans-serif;
+  }
+
+  ::selection {
+    background: var(--ink);
+    color: var(--bg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  /* Page container: 12-col editorial grid lives inside this */
+  .wrap {
+    width: 100%;
+    max-width: var(--container);
+    margin-inline: auto;
+    padding-inline: 20px;
+  }
+  @media (min-width: 640px) { .wrap { padding-inline: 28px; } }
+  @media (min-width: 1024px) { .wrap { padding-inline: 48px; } }
+
+  /* Mono label — the only small-caps voice on the site */
+  .label-mono {
+    font-family: var(--font-geist-mono), ui-monospace, monospace;
+    font-size: 0.75rem;
+    line-height: 1.2;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--mute);
+  }
+
+  /* Data moving along a diagram edge: one dot per cycle (path uses pathLength=100) */
+  .flow-packet {
+    stroke-dasharray: 0.5 99.5;
+    stroke-dashoffset: 100;
+    animation: flow-packet var(--packet-dur, 2.8s) linear infinite;
+    animation-delay: var(--packet-delay, 0s);
+  }
+  [data-paused="true"] .flow-packet {
+    animation-play-state: paused;
+  }
+
+  /* Text link whose underline draws in on hover */
+  .link-draw {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    transition: background-size .4s var(--ease-out);
+  }
+  .link-draw:hover,
+  .link-draw:focus-visible {
+    background-size: 100% 1px;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gradient-text {
+    background: var(--quishub-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    font-weight: 600;
+  }
+
+  .brand-gradient {
+    background: var(--quishub-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0px 2px 4px rgba(124, 58, 237, 0.25));
+  }
+
+  .section-dark {
+    background-color: rgb(var(--quishub-light-rgb));
+  }
+
+  .section-light {
+    background-color: rgb(var(--quishub-surface-rgb));
+  }
+
+  .section-white {
+    background-color: rgb(var(--quishub-surface-alt-rgb));
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+
+  .container-content {
+    @apply mx-auto max-w-content px-6 md:px-12;
+  }
+
+  .font-brand {
+    font-family: var(--font-texar), var(--font-tt-lakes), system-ui, sans-serif;
+  }
+
+  .font-ui {
+    font-family: var(--font-ui-stack);
+  }
+
+  .font-body {
+    font-family: var(--font-sora), system-ui, sans-serif;
+  }
+
+  .hero-stage {
+    background-image: var(--hero-glow-primary), var(--hero-glow-secondary);
+    background-repeat: no-repeat;
+  }
+
+  .nav-surface-rest {
+    background-color: var(--nav-bg-rest);
+  }
+
+  .nav-surface-scrolled {
+    background-color: var(--nav-bg-scrolled);
+  }
+
+  .theme-icon-box {
+    background-color: var(--theme-icon-bg);
+  }
+
+  .theme-number-ghost {
+    color: var(--theme-number-ghost);
+  }
+
+  .surface-card {
+    background: var(--surface-card-bg);
+    border: 1px solid var(--surface-card-border);
+    box-shadow: var(--surface-card-shadow);
+  }
+
+  .surface-card-strong {
+    background: var(--surface-card-strong-bg);
+    border: 1px solid var(--surface-card-border);
+    box-shadow: var(--surface-card-shadow);
+  }
+
+  .surface-subtle {
+    background: var(--surface-subtle-bg);
+    border: 1px solid var(--surface-subtle-border);
+  }
+
+  .surface-chip {
+    background: var(--surface-chip-bg);
+    border: 1px solid var(--surface-chip-border);
+  }
+
+  .surface-icon {
+    background: var(--surface-icon-bg);
+  }
+
+  .surface-divider {
+    border-color: var(--surface-divider);
+  }
+
+  .surface-connector {
+    border-color: var(--surface-connector);
+  }
+
+  .surface-number {
+    color: var(--surface-number);
+  }
+
+  .field-surface {
+    background: var(--surface-card-bg);
+    border-color: var(--surface-card-border);
+  }
+
+  .logo-dark {
+    display: none;
+  }
+
+  [data-theme="dark"] .logo-light {
+    display: none;
+  }
+
+  [data-theme="dark"] .logo-dark {
+    display: block;
+  }
+}
+
+body[data-menu="open"] .chatbot-widget {
+  display: none;
+}
+
+/* Healthcare standalone isolation — hides root chrome */
+html[data-standalone="healthcare"] header,
+html[data-standalone="healthcare"] .chatbot-widget,
+html[data-standalone="healthcare"] [aria-label="Toggle menu"],
+html[data-standalone="healthcare"] [data-theme-toggle],
+html[data-standalone="healthcare"] footer {
+  display: none !important;
+}
+html[data-standalone="healthcare"] main {
+  padding-top: 0 !important;
+}
+
+@keyframes flow-packet {
+  from { stroke-dashoffset: 100; }
+  to { stroke-dashoffset: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .flow-packet {
+    display: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

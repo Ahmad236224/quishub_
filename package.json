@@ -1,0 +1,58 @@
+{
+  "name": "quishub",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@google-cloud/vertexai": "^1.12.0",
+    "@google/genai": "^2.4.0",
+    "@google/generative-ai": "^0.24.1",
+    "@heroicons/react": "^2.2.0",
+    "@portabletext/react": "^3.2.4",
+    "@react-three/drei": "^9.122.0",
+    "@react-three/fiber": "^8.18.0",
+    "@sanity/image-url": "^2.1.1",
+    "@sanity/vision": "^3.59.1",
+    "@types/node": "^20.19.39",
+    "@types/nodemailer": "^8.0.2",
+    "@types/react": "^18.3.28",
+    "axios": "^1.9.0",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.38.0",
+    "geist": "^1.7.0",
+    "lucide-react": "^1.7.0",
+    "next": "^14.2.35",
+    "next-sanity": "^9.5.6",
+    "nodemailer": "^10.0.10",
+    "ogl": "^1.0.11",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sanity": "^3.59.1",
+    "styled-components": "^6.5.3",
+    "tailwind-merge": "^3.5.0",
+    "three": "^0.170.0",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@types/react-dom": "^18.3.7",
+    "@types/three": "^0.170.0",
+    "autoprefixer": "^10.4.27",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^14.2.35",
+    "postcss": "^8.5.8",
+    "sharp": "^0.35.4",
+    "tailwindcss": "^3.4.19"
+  },
+  "overrides": {
+    "react-compiler-runtime": "1.0.0"
+  }
+}
